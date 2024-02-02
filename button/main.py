@@ -1,12 +1,9 @@
-from machine import Pin
-import time
+import machine, time
 
-button = Pin(2, Pin.IN, Pin.PULL_UP)
+btn = machine.Pin(2, mode=machine.Pin.IN, pull=machine.Pin.PULL_UP)
 
+def t(pin):
+    print('hey')
 
 while True:
-    if button.value() == 0:
-        print("Button is Pressed")
-    else:
-        print("Button is not Pressed")
-    time.sleep(0.1)
+    btn.irq(handler=t, trigger=machine.Pin.IRQ_FALLING)
