@@ -1,13 +1,20 @@
 from stepper import Stepper
+import machine
 import time
 
-s1 = Stepper(step_pin=8, dir_pin=20, steps_per_rev=200,speed_sps=50)
+s1 = Stepper(8,20,steps_per_rev=400,speed_sps=900, timer_id=0)
+pos = 0
 
-s1.speed(20)
+# s1.target(1500)
+# print(s1.get_pos())
+# time.sleep(2.0)
+# print(s1.get_pos())
+# s1.target(0)
+# print(s1.get_pos())
+# time.sleep(2.0)
+# print(s1.get_pos())
+# s1.free_run(-1)
 
-print(s1.get_pos_deg())
-s1.target_deg(360)
-print(s1.get_pos_deg())
-time.sleep(2)
-s1.target_deg(-360)
-print(s1.get_pos_deg())
+s1.target(1500)
+time.sleep(2.0)
+s1.target(0)

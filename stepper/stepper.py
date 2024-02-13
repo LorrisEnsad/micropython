@@ -5,17 +5,15 @@ import time
 class Stepper:
     def __init__(self,step_pin,dir_pin,en_pin=None,steps_per_rev=200,speed_sps=10,invert_dir=False,timer_id=-1):
         
-        # if not isinstance(step_pin, machine.Pin):
-        #     step_pin=machine.Pin(step_pin,machine.Pin.OUT)
-        # if not isinstance(dir_pin, machine.Pin):
-        #     dir_pin=machine.Pin(dir_pin,machine.Pin.OUT)
-        # if (en_pin != None) and (not isinstance(en_pin, machine.Pin)):
-        #     en_pin=machine.Pin(en_pin,machine.Pin.OUT)
-
-        self.step_pin=machine.Pin(step_pin, machine.Pin.OUT)
-        self.dir_pin=machine.Pin(dir_pin, machine.Pin.OUT)
-        self.step_value_func = self.step_pin.value
-        self.dir_value_func = self.dir_pin.value
+        if not isinstance(step_pin, machine.Pin):
+            step_pin=machine.Pin(step_pin,machine.Pin.OUT)
+        if not isinstance(dir_pin, machine.Pin):
+            dir_pin=machine.Pin(dir_pin,machine.Pin.OUT)
+        if (en_pin != None) and (not isinstance(en_pin, machine.Pin)):
+            en_pin=machine.Pin(en_pin,machine.Pin.OUT)
+                 
+        self.step_value_func = step_pin.value
+        self.dir_value_func = dir_pin.value
         self.en_pin = en_pin
         self.invert_dir = invert_dir
 
@@ -29,13 +27,12 @@ class Stepper:
         self.steps_per_sec = speed_sps
         self.steps_per_rev = steps_per_rev
         
-        # self.track_target()
+        self.track_target()
         
     def speed(self,sps):
         self.steps_per_sec = sps
         if self.timer_is_running:
             self.track_target()
-            pass
     
     def speed_rps(self,rps):
         self.speed(rps*self.steps_per_rev)
