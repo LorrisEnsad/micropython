@@ -22,12 +22,6 @@ import uasyncio as asyncio
 import time
 import machine
 
-btn = machine.Pin(2, mode=machine.Pin.IN, pull=machine.Pin.PULL_UP)
-
-def btnPress(pin):
-    print('Button pressed')
-
-
 # example of a class that uses one rotary encoder
 class Application1():
     def __init__(self, r1):
