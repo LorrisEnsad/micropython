@@ -1,36 +1,99 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Microdot WebSocket Demo</title>
-    <meta charset="UTF-8">
-  </head>
-  <body>
-    <h1>Microdot WebSocket Demo</h1>
-    <div id="log"></div>
-    <br>
-    <form id="form">
+<head>
+  <title>Microdot WebSocket Demo</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>Microdot WebSocket Demo</h1>
+  <div id="log"></div>
+  <br>
+  <form id="form">
+    <div>
+      <h3>Text Input</h3>
       <label for="text">Input: </label>
       <input type="text" id="text" autofocus>
-    </form>
-    <script>
-      const log = (text, color) => {
-        document.getElementById('log').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
-      };
-
-      const socket = new WebSocket('ws://' + location.host + '/echo');
-      socket.addEventListener('message', ev => {
-        log('<<< ' + ev.data, 'blue');
-      });
-      socket.addEventListener('close', ev => {
-        log('<<< closed');
-      });
-      document.getElementById('form').onsubmit = ev => {
-        ev.preventDefault();
-        const textField = document.getElementById('text');
-        log('>>> ' + textField.value, 'red');
-        socket.send(textField.value);
-        textField.value = '';
-      };
-    </script>
-  </body>
+    </div>
+  </form>
+  <br/>
+  <hr/>
+  <div>
+    <h3>Button</h3>
+    <input type="button" id="btn" value="Button" onclick="btnToggle()">
+  </div>
+  <br/>
+  <hr/>
+  <div>
+    <h3>Slider</h3>
+    <input type="range" id="slider" min="1" max="100" value="50">
+  </div>
+  <br/>
+  <hr/>
+  <div>
+    <h3>Number</h3>
+    <input type="number">
+  </div>
+  <br/>
+  <hr/>
+  <div>
+    <h3>color</h3>
+    <input type="color" id="colorpicker">
+  </div>
+  <br/>
+  <hr/>
+  <div>
+    <h3>Checkbox</h3>
+    <input type="checkbox">
+  </div>
+  <script>
+    //***************
+    // WEBSOCKET
+    const socket = new WebSocket('ws://' + location.host + '/echo');
+    //***************
+    // TXT
+    const log = (text, color) => {
+      // document.getElementById('log').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
+    };
+    document.getElementById('form').onsubmit = ev => {
+      ev.preventDefault();
+      const textField = document.getElementById('text');
+      log('>>> ' + textField.value, 'red');
+      socket.send("Text Input : "+textField.value);
+      textField.value = '';
+    };
+    //***************
+    // SLIDER WS
+    const slider = (data)=>{
+      // document.getElementById('sliderVal').innerHTML = data
+    };
+    socket.addEventListener('message', ev=>{
+      slider(ev.data);
+    });
+    document.getElementById("slider").oninput = ev =>{
+      ev.preventDefault();
+      const saliderValue = document.getElementById('slider');
+      slider(saliderValue.value);
+      socket.send("Slider : "+saliderValue.value);
+    };
+    //***************
+    // BTN WS
+    var btnstate = false;
+    function btnToggle(){
+      btnstate = (btnstate==true)?false:true;
+      socket.send("Button : "+btnstate);
+    };
+    //***************
+    // COLOR PICKER WS
+    socket.addEventListener('message', ev=>{
+      ev.preventDefault();
+      const colorpicker = document.getElementById('colorpicker')
+    });
+    document.getElementById("colorpicker").oninput = ev =>{
+      ev.preventDefault();
+      const colorpickerValue = document.getElementById('colorpicker');
+      slider(colorpickerValue.value);
+      socket.send("colorpicker : "+colorpickerValue.value);
+    };
+  </script>
+</body>
 </html>
