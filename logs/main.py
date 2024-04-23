@@ -13,9 +13,7 @@ new_time = 0
 btnPrevState = 0
 
 f = open("log.txt", "w")
-s = "boot , "
-count_ms()
-s+=str(random.randint(0, 100))
+s = "== boot =="
 s+="\n"
 f.write(s)
 f.close()
@@ -28,10 +26,11 @@ def writeFile(string):
 while True:
     if btn.value()==0 and btnPrevState!=btn.value() :
         btnPrevState = btn.value()
-        s = "action , "
+        s = "action,"
         count_ms()
         s+=str(new_time)
         s+="\n"
         writeFile(s)
         print(s)
+        time.sleep_ms(100)
     btnPrevState = btn.value()
