@@ -17,5 +17,4 @@ async def echo(request, ws):
         # print(f'{type(data)} : {data}')
         print(data)
 
-
 app.run()

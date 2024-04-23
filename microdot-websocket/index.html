@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <h1>Microdot WebSocket Demo</h1>
+  <h2>Microdot WebSocket Demo</h2>
   <div id="log"></div>
   <br>
   <form id="form">
@@ -26,12 +26,6 @@
   <div>
     <h3>Slider</h3>
     <input type="range" id="slider" min="1" max="100" value="50">
-  </div>
-  <br/>
-  <hr/>
-  <div>
-    <h3>Number</h3>
-    <input type="number">
   </div>
   <br/>
   <hr/>
@@ -92,7 +86,7 @@
       ev.preventDefault();
       const colorpickerValue = document.getElementById('colorpicker');
       slider(colorpickerValue.value);
-      socket.send("colorpicker : "+colorpickerValue.value);
+      socket.send("Color-picker : "+colorpickerValue.value);
     };
   </script>
 </body>
