@@ -25,7 +25,7 @@ IS_UASYNCIO_V3 = hasattr(asyncio, "__version__") and asyncio.__version__ >= (3,)
 
 
 # Access point settings
-SERVER_SSID = 'OlaTodos'  # max 32 characters
+SERVER_SSID = 'Esp32'  # max 32 characters
 SERVER_IP = '10.0.0.1'
 SERVER_SUBNET = '255.255.255.0'
 
