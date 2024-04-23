@@ -78,15 +78,31 @@
     };
     //***************
     // COLOR PICKER WS
+    const colorpicker = (data)=>{
+      // document.getElementById('sliderVal').innerHTML = data
+    };
     socket.addEventListener('message', ev=>{
-      ev.preventDefault();
-      const colorpicker = document.getElementById('colorpicker')
+      colorpicker(ev.data);
     });
     document.getElementById("colorpicker").oninput = ev =>{
       ev.preventDefault();
       const colorpickerValue = document.getElementById('colorpicker');
-      slider(colorpickerValue.value);
+      colorpicker(colorpickerValue.value);
       socket.send("Color-picker : "+colorpickerValue.value);
+    };
+    //***************
+    // CHECK BOX WS
+    const checkbox = (data)=>{
+      // document.getElementById('sliderVal').innerHTML = data
+    };
+    socket.addEventListener('message', ev=>{
+      checkbox(ev.data);
+    });
+    document.getElementById("checkbox").oninput = ev =>{
+      ev.preventDefault();
+      const checkboxVal = document.getElementById('checkbox');
+      checkbox(checkboxVal.value);
+      socket.send("Check box : "+checkboxVal.value);
     };
   </script>
 </body>
