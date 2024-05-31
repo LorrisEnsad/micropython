@@ -11,5 +11,4 @@ light.atten(ADC.ATTN_11DB) #full range 3.3V
 for i in range(MAX):
     buffer.append(light.read())
     time.sleep(0.05)
-
 print("done")
