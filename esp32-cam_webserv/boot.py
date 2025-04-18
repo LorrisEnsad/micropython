@@ -2,8 +2,8 @@ import network
 import time
 
 # --- WiFi ---
-ssid = 'TON_SSID'
-password = 'TON_MOT_DE_PASSE'
+ssid = 'SSID'
+password = 'pass'
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
