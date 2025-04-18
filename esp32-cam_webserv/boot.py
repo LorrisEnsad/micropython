@@ -1,8 +1,8 @@
 import network
 import time
 
-# --- WiFi ---
-ssid = 'SSID'
+# --- WiFi --- 
+ssid = 'SSID_'
 password = 'pass'
 
 wlan = network.WLAN(network.STA_IF)
